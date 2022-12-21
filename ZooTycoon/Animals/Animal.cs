@@ -11,7 +11,7 @@ namespace ZooTycoon
         Male,
         Female
     }
-    class Animal
+    public class Animal
     {
         public string AnimalName { 
             
@@ -45,7 +45,17 @@ namespace ZooTycoon
             }
             get { return coast; }
         }
-        public int Age { private set; get; }
+
+        private int age = 0;
+        public  int Age { get; set; }
+        
+        
+
+
+
+
+
+
         protected virtual int MinAgeAdult { set;  get; }
         private int satiety = 10;
         public int Satiety { 
@@ -110,9 +120,9 @@ namespace ZooTycoon
             Health--;
         }
 
-        public void GrowUp()
+        public void GrowUp(int mach)
         {
-            Age++;
+            Age= Age+mach;
         }
 
     }

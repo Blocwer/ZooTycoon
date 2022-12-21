@@ -1,8 +1,8 @@
 ﻿using ZooTycoon;
-
-Animal animal = new Tiger("fedya", Gender.Male);
-animal.Feed(new ChikenFood());
+Animal giraffe = new Giraffe("Rafik", Gender.Male);
+giraffe.Feed(new Banana());
 Console.ReadKey();
+
 
 
 
