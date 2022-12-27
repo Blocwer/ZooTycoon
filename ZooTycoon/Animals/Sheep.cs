@@ -9,7 +9,7 @@ namespace ZooTycoon
     internal class Sheep : Animal
     {
 
-        public Sheep(string name, Gender gender) : base("Овца", "Овечка", name, 2, 140M, gender)
+        public Sheep(string name, Gender gender) : base("Овца", "Овечка", name, 140M, gender, new TimeSpan(0,5,0))
         {
 
         }

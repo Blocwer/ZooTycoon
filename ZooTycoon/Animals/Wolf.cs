@@ -2,7 +2,7 @@
 {
     internal class Wolf:Animal
     {
-        public Wolf(string name, Gender gender) :base("Волк","Волченок", name, 3, 200M , gender)
+        public Wolf(string name, Gender gender) :base("Волк","Волченок", name, 200, gender , new TimeSpan(0,4,0))
         {   
         }
         public override void Feed(Food foodObj)

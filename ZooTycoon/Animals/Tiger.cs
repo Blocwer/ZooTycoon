@@ -8,7 +8,7 @@ namespace ZooTycoon
 {
     internal class Tiger:Animal
     {
-        public Tiger(string name, Gender gender) :base("Тигр","Тигренок", name, 3, 300M , gender)
+        public Tiger(string name, Gender gender) :base("Тигр","Тигренок", name, 300M, gender , new TimeSpan(0,10,0))
         {   
         }
         public override void Feed(Food foodObj)

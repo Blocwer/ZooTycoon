@@ -2,7 +2,7 @@
 {
     internal class Elephant:Animal
     {
-        public Elephant(string name, Gender gender) :base("Слон","Слоненок", name, 5, 500M , gender)
+        public Elephant(string name, Gender gender) :base("Слон","Слоненок", name, 500, gender , new TimeSpan(0,10,0))
         {   
         }
         public override void Feed(Food foodObj)

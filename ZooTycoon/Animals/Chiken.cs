@@ -9,7 +9,7 @@ namespace ZooTycoon
     public class Chiken : Animal
 
     {
-        public Chiken(string name, Gender gender) : base("курица", "ципленок", name, 2, 50M, gender)
+        public Chiken(string name, Gender gender) : base("курица", "ципленок", name, 50, gender,new TimeSpan(0,2,0))
         {
 
         }

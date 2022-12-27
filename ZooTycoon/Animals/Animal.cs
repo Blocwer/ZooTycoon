@@ -13,6 +13,8 @@ namespace ZooTycoon
     }
     public class Animal
     {
+
+        private string animalName = "";
         public string AnimalName { 
             
             get
@@ -23,10 +25,10 @@ namespace ZooTycoon
                 }
                 else
                 {
-                    return AnimalName;
+                    return animalName;
                 }
             }
-            private set { }
+            private set { animalName = value; }
         }
         public string AnimalChildName { private set; get; }
         public string Name { set; get; }
@@ -45,29 +47,49 @@ namespace ZooTycoon
             }
             get { return coast; }
         }
+        private DateTime dateBirthadayTime = DateTime.Now;
+        private DateTime timeOfLastFeed = DateTime.Now;
+        private DateTime whenSatietyDropZeroTime = DateTime.Now;
 
         private int age = 0;
-        public  int Age { get; set; }
-        
-        
+        public  int Age  {  
+        private set
+        {
+            if(Age < 1000 && Age >= 0)
+            {
+                age = value;
+            }
+            if(Age <= 0)
+            {
+                age = 0;
+            }  
+        }
+        get 
+        { return age; }
+    }
 
-
-
-
-
-
-        protected virtual int MinAgeAdult { set;  get; }
-        private int satiety = 10;
+        private int MinAgeAdult = 10;
+        public TimeSpan TimeToGrowUp {private set; get; }
+        private int satiety = 10  ;
         public int Satiety { 
             private set
-            {
-                if(Satiety < 10 && Satiety > 0)
+            { 
+                if(Satiety <= 10 && Satiety >= 0)
                 {
-                    satiety = value;
+                    if (value > 10)
+                    {
+                        satiety = 10;
+                    }
+                    else
+                    {
+                        satiety = value;
+                    }
+                    
                 }
-                if(Satiety <= 0)
+                if(Satiety <= 0 )
                 {
                     satiety = 0;
+                    whenSatietyDropZeroTime = TimeNow();
                 }  
             }
             get 
@@ -78,9 +100,17 @@ namespace ZooTycoon
         { 
             private set
             {
-                if (Health < 10 && Health > 0)
+                if (Health <= 10 && Health > 0)
                 {
-                    health = value;
+                    if (value > 10)
+                    {
+                        health = 10;
+                    }
+                    else
+                    {
+                        health = value;
+                    }
+                    
                 }
                 if (Health <= 0)
                 {
@@ -94,36 +124,62 @@ namespace ZooTycoon
         
 
 
-        public Animal(string animalName, string animaChildName, string name, int minAgeAdult, decimal coast, Gender gender)
+        public Animal(string animalName, string animaChildName, string name, decimal coast, Gender gender, TimeSpan timeToGrowUp)
         {
             AnimalName = animalName;
             AnimalChildName = animaChildName;
             Name = name;
-            MinAgeAdult = minAgeAdult;
             Coast = coast; 
             AnimalGender = gender;
-            
+            TimeToGrowUp = timeToGrowUp;
         }
 
         public virtual void Feed(Food foodObj)
-        { 
+        {
         }
         
         protected virtual void Eat(Food foodObj)
         {
             Console.WriteLine($"{AnimalName} {Name} сладко покушал {foodObj.Name}");
             Satiety++;
+            timeOfLastFeed = TimeNow();
+
         }
         protected virtual void ThrowUp(Food foodObj)
         {
             Console.WriteLine($"{AnimalName} {Name} блеванул от {foodObj.Name}");
             Health--;
         }
-
-        public void GrowUp(int mach)
+        DateTime TimeNow()
         {
-            Age= Age+mach;
+            DateTime timeNow = DateTime.Now;
+            return timeNow;
         }
 
+        public void GrowUp()
+        {
+            
+            TimeSpan time = (TimeNow().Subtract(dateBirthadayTime));
+            int timeDivide = Convert.ToInt32(time / TimeToGrowUp);
+            Age = timeDivide;
+        }
+
+        public void MinusSatiety()
+        {
+            TimeSpan time = (TimeNow().Subtract(timeOfLastFeed));
+            int timeDivide = Convert.ToInt32(time /  new TimeSpan(0, 0, 2));
+            Satiety = Satiety - timeDivide;
+        }
+ 
+        public void HungrySick()
+        {
+            TimeSpan time = (TimeNow().Subtract(whenSatietyDropZeroTime));
+            int timeDivide = Convert.ToInt32(time / new TimeSpan(0, 0, 2));
+            if (Satiety == 0)
+            {
+                Health = Health - timeDivide; 
+            }
+        }
     }
 }
+ 
