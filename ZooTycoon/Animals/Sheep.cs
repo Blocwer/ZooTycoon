@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace ZooTycoon
 {
-    internal class Tiger:Animal
+    internal class Sheep : Animal
     {
-        public Tiger(string name, Gender gender) :base("Тигр","Тигренок", name, 3, 300M , gender)
-        {   
+
+        public Sheep(string name, Gender gender) : base("Овца", "Овечка", name, 140M, gender, new TimeSpan(0,5,0))
+        {
+
         }
+
         public override void Feed(Food foodObj)
         {
-            if (foodObj.TypeFood == FoodList.Meat)
+            if (foodObj.TypeFood == FoodList.Seed)
                 Eat(foodObj);
             else
                 ThrowUp(foodObj);
         }
-
     }
 }

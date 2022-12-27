@@ -13,7 +13,7 @@ namespace ZooTycoon
         Vegetable,
         Seed
     }
-    class Food
+    public class Food
     {
         public FoodList TypeFood { private set; get; }
         public string Name { set; get; }
